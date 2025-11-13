@@ -12,7 +12,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import type { Client, CreateClientDto, UpdateClientDto } from '@/lib/types'
 
@@ -49,8 +48,6 @@ export function ClientForm({
       phone: client?.phone || '',
     },
   })
-
-  const [formError, setFormError] = useState<string | null>(null)
 
   const handleSubmit = async (data: ClientFormValues) => {
     const submitData: CreateClientDto | UpdateClientDto = {
@@ -114,9 +111,6 @@ export function ClientForm({
             </FormItem>
           )}
         />
-        {/* {formError && (
-          <div className="text-red-600 text-sm mb-2">{formError}</div>
-        )} */}
         <FormField
           control={form.control}
           name="phone"

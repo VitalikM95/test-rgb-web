@@ -35,12 +35,14 @@ import {
 import type { Client, CreateClientDto, UpdateClientDto } from '@/lib/types'
 import { Plus, Edit, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { ConfirmDialog } from '@/components/confirm-dialog'
 
 export default function ClientsPage() {
   const [page, setPage] = useState(1)
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
   const [editingClient, setEditingClient] = useState<Client | null>(null)
   const [deletingClientId, setDeletingClientId] = useState<string | null>(null)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
   const { clients, meta, isLoading, mutate } = useClients({ page, limit: 10 })
   const { createClient, isCreating } = useCreateClient()
@@ -66,18 +68,6 @@ export default function ClientsPage() {
       setEditingClient(null)
     } catch (error) {
       throw error
-    }
-  }
-
-  const handleDelete = async (id: string) => {
-    if (
-      confirm(
-        'Ви впевнені, що хочете видалити цього клієнта? Всі його угоди також будуть видалені.'
-      )
-    ) {
-      await deleteClient(id)
-      await mutate()
-      setDeletingClientId(null)
     }
   }
 
@@ -154,7 +144,10 @@ export default function ClientsPage() {
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => handleDelete(client.id)}
+                            onClick={() => {
+                              setDeletingClientId(client.id)
+                              setIsDeleteDialogOpen(true)
+                            }}
                             disabled={
                               isDeleting && deletingClientId === client.id
                             }
@@ -237,6 +230,23 @@ export default function ClientsPage() {
           )}
         </DialogContent>
       </Dialog>
+      <ConfirmDialog
+        open={isDeleteDialogOpen}
+        title="Видалити клієнта?"
+        description="Ви впевнені, що хочете видалити цього клієнта? Всі його угоди також будуть видалені."
+        confirmText="Видалити"
+        cancelText="Скасувати"
+        loading={isDeleting}
+        onCancel={() => setIsDeleteDialogOpen(false)}
+        onConfirm={async () => {
+          if (deletingClientId) {
+            await deleteClient(deletingClientId)
+            await mutate()
+            setDeletingClientId(null)
+            setIsDeleteDialogOpen(false)
+          }
+        }}
+      />
     </div>
   )
 }

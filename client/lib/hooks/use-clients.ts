@@ -7,12 +7,7 @@ import type {
   UpdateClientDto,
   PaginationQuery,
 } from '../types'
-import ClientDetailPage from '@/app/clients/[id]/page'
 
-// Fetcher для SWR
-const fetcher = (url: string) => clientsApi.findAll().then(res => res)
-
-// Отримання списку клієнтів з пагінацією
 export function useClients(query?: PaginationQuery) {
   const queryString = query
     ? `?page=${query.page || 1}&limit=${query.limit || 10}`
@@ -31,7 +26,6 @@ export function useClients(query?: PaginationQuery) {
   }
 }
 
-// Отримання одного клієнта
 export function useClient(id: string | null) {
   const { data, error, isLoading, mutate } = useSWR<Client>(
     id ? `/clients/${id}` : null,
@@ -47,7 +41,6 @@ export function useClient(id: string | null) {
   }
 }
 
-// Створення клієнта
 export function useCreateClient() {
   const { trigger, isMutating } = useSWRMutation(
     '/clients',
@@ -62,7 +55,6 @@ export function useCreateClient() {
   }
 }
 
-// Оновлення клієнта
 export function useUpdateClient() {
   const { trigger, isMutating } = useSWRMutation(
     '/clients',
@@ -77,7 +69,6 @@ export function useUpdateClient() {
   }
 }
 
-// Видалення клієнта
 export function useDeleteClient() {
   const { trigger, isMutating } = useSWRMutation(
     '/clients',

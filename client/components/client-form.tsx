@@ -57,18 +57,15 @@ export function ClientForm({
     }
 
     try {
-      // Очистка попередніх помилок
       form.clearErrors()
       await onSubmit(submitData)
     } catch (error: any) {
-      // Якщо сервер повернув повідомлення про конкретне поле, встановлюємо через setError
       if (error?.response?.data?.field && error?.response?.data?.message) {
         form.setError(error.response.data.field as keyof ClientFormValues, {
           type: 'server',
           message: error.response.data.message,
         })
       } else if (error?.response?.data?.message) {
-        // Якщо загальна помилка, виводимо на email (чи інше поле за замовчуванням)
         form.setError('email', {
           type: 'server',
           message: error.response.data.message,

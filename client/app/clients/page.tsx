@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -81,7 +80,7 @@ export default function ClientsPage() {
 
   return (
     <div className="container mx-auto py-8">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-6 mx-6">
         <div>
           <h1 className="text-3xl font-bold">Клієнти</h1>
           <p className="text-muted-foreground">Управління клієнтами</p>
@@ -120,31 +119,37 @@ export default function ClientsPage() {
                 </TableHeader>
                 <TableBody>
                   {clients.map(client => (
-                    <TableRow key={client.id}>
+                    <TableRow
+                      key={client.id}
+                      onClick={() => router.push(`/clients/${client.id}`)}
+                      className="cursor-pointer"
+                    >
                       <TableCell className="font-medium">
-                        <Link
-                          href={`/clients/${client.id}`}
-                          className="hover:underline text-primary"
-                        >
-                          {client.name}
-                        </Link>
+                        {client.name}
                       </TableCell>
+
                       <TableCell>{client.email}</TableCell>
                       <TableCell>{client.phone || '-'}</TableCell>
                       <TableCell>{formatDate(client.createdAt)}</TableCell>
+
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => setEditingClient(client)}
+                            onClick={e => {
+                              e.stopPropagation()
+                              setEditingClient(client)
+                            }}
                           >
                             <Edit className="h-4 w-4" />
                           </Button>
+
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => {
+                            onClick={e => {
+                              e.stopPropagation()
                               setDeletingClientId(client.id)
                               setIsDeleteDialogOpen(true)
                             }}

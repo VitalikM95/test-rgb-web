@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -46,7 +45,7 @@ import type {
   UpdateDealDto,
   DealStatus,
 } from '@/lib/types'
-import { Plus, Edit, Trash2 } from 'lucide-react'
+import { Plus, Trash2 } from 'lucide-react'
 import { DealStatus as DealStatusEnum } from '@/lib/types'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 
@@ -120,7 +119,7 @@ export default function DealsPage() {
 
   return (
     <div className="container mx-auto py-8">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-6 mx-6">
         <div>
           <h1 className="text-3xl font-bold">Угоди</h1>
           <p className="text-muted-foreground">Управління угодами</p>

@@ -37,7 +37,6 @@ import { useClients } from '@/lib/hooks/use-clients'
 import { useCreateDeal, useDeleteDeal } from '@/lib/hooks/use-deals'
 import type { UpdateClientDto, CreateDealDto, UpdateDealDto } from '@/lib/types'
 import { Edit, Trash2, Plus, ArrowLeft } from 'lucide-react'
-import { DealStatus } from '@/lib/types'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 
 export default function ClientDetailPage() {
@@ -120,7 +119,7 @@ export default function ClientDetailPage() {
 
   return (
     <div className="container mx-auto py-8">
-      <div className="mb-6">
+      <div className="mb-6 mx-6">
         <Link href="/clients">
           <Button variant="outline" size="sm">
             <ArrowLeft className="mr-2 h-4 w-4" />

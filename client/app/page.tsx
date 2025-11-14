@@ -1,7 +1,13 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Handshake } from 'lucide-react';
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Users, Handshake } from 'lucide-react'
 
 export default function Home() {
   return (
@@ -10,10 +16,6 @@ export default function Home() {
         <h1 className="text-4xl font-bold mb-4 text-center">
           Система управління клієнтами та угодами
         </h1>
-        <p className="text-muted-foreground text-lg mb-12 text-center max-w-2xl">
-          Повнофункціональний CRUD-додаток для управління клієнтами та їх угодами
-        </p>
-
         <div className="grid gap-6 md:grid-cols-2 max-w-4xl w-full">
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
@@ -21,9 +23,7 @@ export default function Home() {
                 <Users className="h-6 w-6 text-primary" />
                 <CardTitle className="text-2xl">Клієнти</CardTitle>
               </div>
-              <CardDescription>
-                Управління клієнтами: створення, перегляд, редагування та видалення
-              </CardDescription>
+              <CardDescription>Управління клієнтами</CardDescription>
             </CardHeader>
             <CardContent>
               <Link href="/clients">
@@ -38,9 +38,7 @@ export default function Home() {
                 <Handshake className="h-6 w-6 text-primary" />
                 <CardTitle className="text-2xl">Угоди</CardTitle>
               </div>
-              <CardDescription>
-                Управління угодами з фільтрацією за статусом та клієнтом
-              </CardDescription>
+              <CardDescription>Управління угодами</CardDescription>
             </CardHeader>
             <CardContent>
               <Link href="/deals">
@@ -49,11 +47,7 @@ export default function Home() {
             </CardContent>
           </Card>
         </div>
-
-        <div className="mt-12 text-center text-sm text-muted-foreground">
-          <p>Використано технології: Next.js, shadcn/ui, SWR, TypeScript, Zod</p>
-        </div>
       </div>
     </div>
-  );
+  )
 }

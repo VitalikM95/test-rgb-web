@@ -50,31 +50,31 @@
 
 ### 2. Запуск бекенду
 
-Знаходячись в папці /server виконайте команди
+1. Знаходячись в папці /server виконайте команди
 
-    ```bash
-    npm install
-    npm run migration:run
-    npm run start:dev
-    ```
+   ```bash
+   npm install
+   npm run migration:run
+   npm run start:dev
+   ```
 
 Бекенд буде доступний за адресою: http://localhost:3000
 Swagger документація: http://localhost:3000/docs
 
 ### 3. Запуск фронтенду
 
-Перейдіть до папки /client
+1. Перейдіть до папки /client
 
-    ```bash
-    cd ../client
-    ```
+   ```bash
+   cd ../client
+   ```
 
-Знаходячись в папці /client виконайте команди
+2. Знаходячись в папці /client виконайте команди
 
-    ```bash
-    npm install
-    npm run dev
-    ```
+   ```bash
+   npm install
+   npm run dev
+   ```
 
 Фронтенд працює на: http://localhost:3001 - За даним посиланням буде доступний функціонал додатку
 

@@ -23,25 +23,21 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document)
-
-  // Налаштування CORS для роботи з фронтендом
   const allowedOrigins: (string | RegExp)[] = [
-    'http://localhost:3001', // Фронтенд на порту 3001
-    'http://localhost:3000', // Якщо фронтенд на іншому порту
-    /^http:\/\/localhost:\d+$/, // Дозволити всі localhost порти для development
+    'http://localhost:3001',
+    'http://localhost:3000',
+    /^http:\/\/localhost:\d+$/,
   ]
 
-  // Додати додаткові origin з змінної оточення (через кому)
   if (process.env.FRONTEND_URL) {
     const urls = process.env.FRONTEND_URL.split(',').map(url => url.trim())
     allowedOrigins.push(...urls)
   }
 
-  // Для development також дозволити всі origin (опційно)
   const isDevelopment = process.env.NODE_ENV !== 'production'
 
   app.enableCors({
-    origin: isDevelopment ? true : allowedOrigins, // В development дозволити всі origin для зручності тестування
+    origin: isDevelopment ? true : allowedOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
